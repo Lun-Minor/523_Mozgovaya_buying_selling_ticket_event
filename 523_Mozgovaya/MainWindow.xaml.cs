@@ -23,6 +23,8 @@ namespace _523_Mozgovaya
         public MainWindow()
         {
             InitializeComponent();
+
+            mainframe.Navigate(new MainPage());
         }
     }
 }
