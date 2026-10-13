@@ -20,13 +20,14 @@ namespace _523_Mozgovaya
             this.Event = new HashSet<Event>();
         }
     
-        public int id_organizer { get; set; }
-        public int id_user { get; set; }
+        public int id_organizator { get; set; }
         public string org_name { get; set; }
         public string inn { get; set; }
         public string contact_email { get; set; }
+        public Nullable<int> id_user { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Event { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace _523_Mozgovaya
 {
     public class Core
     {
-        public static List<Entities2>  entities = new List<Entities2>();
+        public static List<Entities>  entities = new List<Entities>();
     }
 }

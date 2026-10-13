@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace _523_Mozgovaya
+namespace _523_Mozgovaya.OrganizatorPages
 {
     /// <summary>
-    /// Логика взаимодействия для UserPage.xaml
+    /// Логика взаимодействия для OrganizatorPage.xaml
     /// </summary>
-    public partial class UserPage : Page
+    public partial class OrganizatorPage : Page
     {
-        public UserPage()
+        public OrganizatorPage()
         {
             InitializeComponent();
         }

@@ -15,7 +15,7 @@ namespace _523_Mozgovaya
     public partial class Review
     {
         public int id_review { get; set; }
-        public int id_user { get; set; }
+        public int id_user_rev { get; set; }
         public int id_event { get; set; }
         public int rating { get; set; }
         public string comment { get; set; }

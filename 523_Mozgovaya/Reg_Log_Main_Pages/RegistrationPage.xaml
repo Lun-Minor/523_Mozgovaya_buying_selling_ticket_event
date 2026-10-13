@@ -24,13 +24,10 @@
                 <TextBox Width="200" ToolTip="поле для ввода отчества" x:Name="tb_lastname"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
-                <TextBlock Text="введите логин                       "/>
-                <TextBox Width="200" ToolTip="поле для ввода логина" x:Name="tb_login"/>
+                <TextBlock Text="введите логин                       " />
+                <TextBox Width="200" ToolTip="поле для ввода логина" x:Name="tb_login" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
-                <TextBlock Text="введите дату рождения        "/>
-                <TextBox Width="200" ToolTip="поле для ввода даты рождения" x:Name="tb_birth"/>
-            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
                 <TextBlock Text="введите пароль                     "/>
                 <PasswordBox x:Name="pas_box" Width="200" Background="WhiteSmoke" Height="30" ToolTip="поле для ввода пароля" Margin="3"/>

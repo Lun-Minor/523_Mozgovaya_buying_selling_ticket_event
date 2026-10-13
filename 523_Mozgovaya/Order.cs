@@ -23,11 +23,11 @@ namespace _523_Mozgovaya
         public int id_order { get; set; }
         public int id_user { get; set; }
         public System.DateTime order_date { get; set; }
-        public double totalSumm { get; set; }
-        public int amountTicket { get; set; }
+        public double total_summ { get; set; }
+        public int amount_ticket { get; set; }
     
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Ticket { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace _523_Mozgovaya
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities2 : DbContext
+    public partial class Entities : DbContext
     {
-        public Entities2()
-            : base("name=Entities2")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -33,6 +33,7 @@ namespace _523_Mozgovaya
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Organizer> Organizer { get; set; }
         public virtual DbSet<Review> Review { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Session> Session { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Ticket> Ticket { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id_category" />
@@ -73,29 +73,36 @@
           <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_user" Type="int" Nullable="false" />
           <Property Name="order_date" Type="datetime" Nullable="false" />
-          <Property Name="totalSumm" Type="float" Nullable="false" />
-          <Property Name="amountTicket" Type="int" Nullable="false" />
+          <Property Name="total_summ" Type="float" Nullable="false" />
+          <Property Name="amount_ticket" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Organizer">
           <Key>
-            <PropertyRef Name="id_organizer" />
+            <PropertyRef Name="id_organizator" />
           </Key>
-          <Property Name="id_organizer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_organizator" Type="int" Nullable="false" />
           <Property Name="org_name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="inn" Type="nvarchar" MaxLength="100" />
           <Property Name="contact_email" Type="nvarchar" MaxLength="100" />
+          <Property Name="id_user" Type="int" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
             <PropertyRef Name="id_review" />
           </Key>
           <Property Name="id_review" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_user_rev" Type="int" Nullable="false" />
           <Property Name="id_event" Type="int" Nullable="false" />
           <Property Name="rating" Type="int" Nullable="false" />
           <Property Name="comment" Type="text" />
           <Property Name="created_at" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -143,13 +150,12 @@
             <PropertyRef Name="id_user" />
           </Key>
           <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="role" Type="int" Nullable="false" />
+          <Property Name="id_role" Type="int" Nullable="false" />
           <Property Name="login" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="birth_date" Type="date" />
+          <Property Name="name" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Last_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="last_name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK__Event__id_catego__5629CD9C">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -199,30 +205,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Favorite__id_use__5DCAEF64">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Favorite" Type="Self.Favorite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="Favorite">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Order__id_user__5AEE82B9">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Review__id_event__5BE2A6F2">
           <End Role="Event" Type="Self.Event" Multiplicity="1" />
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
@@ -232,18 +214,6 @@
             </Principal>
             <Dependent Role="Review">
               <PropertyRef Name="id_event" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Review__id_user__5CD6CB2B">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Review" Type="Self.Review" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="Review">
-              <PropertyRef Name="id_user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -319,18 +289,75 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6035: В связи "FK__User__id_user__52593CB8" имеются столбцы, которые не являются частью ключа таблицы на первичной стороне связи. Связь исключена.
-        <Association Name="FK__User__id_user__52593CB8" />-->
         <Association Name="FK_Event_Organizer">
           <End Role="Organizer" Type="Self.Organizer" Multiplicity="1" />
           <End Role="Event" Type="Self.Event" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organizer">
-              <PropertyRef Name="id_organizer" />
+              <PropertyRef Name="id_organizator" />
             </Principal>
             <Dependent Role="Event">
               <PropertyRef Name="id_organizer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorite_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Favorite" Type="Self.Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Favorite">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organizer_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Organizer" Type="Self.Organizer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Organizer">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="id_user_rev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id_role" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -345,6 +372,7 @@
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organizer" EntityType="Self.Organizer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
@@ -366,20 +394,8 @@
             <End Role="Event" EntitySet="Event" />
             <End Role="Favorite" EntitySet="Favorite" />
           </AssociationSet>
-          <AssociationSet Name="FK__Favorite__id_use__5DCAEF64" Association="Self.FK__Favorite__id_use__5DCAEF64">
-            <End Role="User" EntitySet="User" />
-            <End Role="Favorite" EntitySet="Favorite" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Order__id_user__5AEE82B9" Association="Self.FK__Order__id_user__5AEE82B9">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="FK__Review__id_event__5BE2A6F2" Association="Self.FK__Review__id_event__5BE2A6F2">
             <End Role="Event" EntitySet="Event" />
-            <End Role="Review" EntitySet="Review" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Review__id_user__5CD6CB2B" Association="Self.FK__Review__id_user__5CD6CB2B">
-            <End Role="User" EntitySet="User" />
             <End Role="Review" EntitySet="Review" />
           </AssociationSet>
           <AssociationSet Name="FK__Session__id_even__5441852A" Association="Self.FK__Session__id_even__5441852A">
@@ -410,8 +426,29 @@
             <End Role="Organizer" EntitySet="Organizer" />
             <End Role="Event" EntitySet="Event" />
           </AssociationSet>
+          <AssociationSet Name="FK_Favorite_User" Association="Self.FK_Favorite_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favorite" EntitySet="Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organizer_User" Association="Self.FK_Organizer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Organizer" EntitySet="Organizer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_User" Association="Self.FK_Review_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -477,34 +514,43 @@
           <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_user" Type="Int32" Nullable="false" />
           <Property Name="order_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="totalSumm" Type="Double" Nullable="false" />
-          <Property Name="amountTicket" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Order__id_user__5AEE82B9" FromRole="Order" ToRole="User" />
+          <Property Name="total_summ" Type="Double" Nullable="false" />
+          <Property Name="amount_ticket" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Ticket" Relationship="Self.FK__Ticket__id_order__59FA5E80" FromRole="Order" ToRole="Ticket" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
         </EntityType>
         <EntityType Name="Organizer">
           <Key>
-            <PropertyRef Name="id_organizer" />
+            <PropertyRef Name="id_organizator" />
           </Key>
-          <Property Name="id_organizer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_organizator" Type="Int32" Nullable="false" />
           <Property Name="org_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="inn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="contact_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_user" Type="Int32" />
           <NavigationProperty Name="Event" Relationship="Self.FK_Event_Organizer" FromRole="Organizer" ToRole="Event" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Organizer_User" FromRole="Organizer" ToRole="User" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
             <PropertyRef Name="id_review" />
           </Key>
           <Property Name="id_review" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_user_rev" Type="Int32" Nullable="false" />
           <Property Name="id_event" Type="Int32" Nullable="false" />
           <Property Name="rating" Type="Int32" Nullable="false" />
           <Property Name="comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Event" Relationship="Self.FK__Review__id_event__5BE2A6F2" FromRole="Review" ToRole="Event" />
-          <NavigationProperty Name="User" Relationship="Self.FK__Review__id_user__5CD6CB2B" FromRole="Review" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Review_User" FromRole="Review" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="Session">
           <Key>
@@ -560,15 +606,16 @@
             <PropertyRef Name="id_user" />
           </Key>
           <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="role" Type="Int32" Nullable="false" />
+          <Property Name="id_role" Type="Int32" Nullable="false" />
           <Property Name="login" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="birth_date" Type="DateTime" Precision="0" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Order" Relationship="Self.FK__Order__id_user__5AEE82B9" FromRole="User" ToRole="Order" />
-          <NavigationProperty Name="Review" Relationship="Self.FK__Review__id_user__5CD6CB2B" FromRole="User" ToRole="Review" />
+          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Organizer" Relationship="Self.FK_Organizer_User" FromRole="User" ToRole="Organizer" />
+          <NavigationProperty Name="Review" Relationship="Self.FK_Review_User" FromRole="User" ToRole="Review" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Event" Relationship="Self.Favorite" FromRole="User" ToRole="Event" />
         </EntityType>
         <Association Name="FK__Event__id_catego__5629CD9C">
@@ -612,7 +659,7 @@
           <End Role="Event" Type="Self.Event" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organizer">
-              <PropertyRef Name="id_organizer" />
+              <PropertyRef Name="id_organizator" />
             </Principal>
             <Dependent Role="Event">
               <PropertyRef Name="id_organizer" />
@@ -643,18 +690,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__id_user__5AEE82B9">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Ticket__id_order__59FA5E80">
           <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
@@ -667,7 +702,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Review__id_user__5CD6CB2B">
+        <Association Name="FK_Order_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organizer_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Organizer" Type="Self.Organizer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Organizer">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
           <ReferentialConstraint>
@@ -675,7 +734,19 @@
               <PropertyRef Name="id_user" />
             </Principal>
             <Dependent Role="Review">
-              <PropertyRef Name="id_user" />
+              <PropertyRef Name="id_user_rev" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id_role" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -711,7 +782,7 @@
           <End Role="Event" Type="Self.Event" Multiplicity="*" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="Entities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Event" EntityType="Self.Event" />
           <EntitySet Name="Genre" EntityType="Self.Genre" />
@@ -720,6 +791,7 @@
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="Organizer" EntityType="Self.Organizer" />
           <EntitySet Name="Review" EntityType="Self.Review" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Session" EntityType="Self.Session" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Ticket" EntityType="Self.Ticket" />
@@ -749,17 +821,25 @@
             <End Role="Location" EntitySet="Location" />
             <End Role="Session" EntitySet="Session" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__id_user__5AEE82B9" Association="Self.FK__Order__id_user__5AEE82B9">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="FK__Ticket__id_order__59FA5E80" Association="Self.FK__Ticket__id_order__59FA5E80">
             <End Role="Order" EntitySet="Order" />
             <End Role="Ticket" EntitySet="Ticket" />
           </AssociationSet>
-          <AssociationSet Name="FK__Review__id_user__5CD6CB2B" Association="Self.FK__Review__id_user__5CD6CB2B">
+          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organizer_User" Association="Self.FK_Organizer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Organizer" EntitySet="Organizer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_User" Association="Self.FK_Review_User">
             <End Role="User" EntitySet="User" />
             <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK__TicketCat__id_se__571DF1D5" Association="Self.FK__TicketCat__id_se__571DF1D5">
             <End Role="Session" EntitySet="Session" />
@@ -783,7 +863,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities2">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="Model.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -840,19 +920,19 @@
                 <ScalarProperty Name="id_order" ColumnName="id_order" />
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
                 <ScalarProperty Name="order_date" ColumnName="order_date" />
-                <ScalarProperty Name="totalSumm" ColumnName="totalSumm" />
-                <ScalarProperty Name="amountTicket" ColumnName="amountTicket" />
+                <ScalarProperty Name="total_summ" ColumnName="total_summ" />
+                <ScalarProperty Name="amount_ticket" ColumnName="amount_ticket" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Organizer">
             <EntityTypeMapping TypeName="Model.Organizer">
               <MappingFragment StoreEntitySet="Organizer">
-                <ScalarProperty Name="id_organizer" ColumnName="id_organizer" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_organizator" ColumnName="id_organizator" />
                 <ScalarProperty Name="org_name" ColumnName="org_name" />
                 <ScalarProperty Name="inn" ColumnName="inn" />
                 <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -860,11 +940,19 @@
             <EntityTypeMapping TypeName="Model.Review">
               <MappingFragment StoreEntitySet="Review">
                 <ScalarProperty Name="id_review" ColumnName="id_review" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_user_rev" ColumnName="id_user_rev" />
                 <ScalarProperty Name="id_event" ColumnName="id_event" />
                 <ScalarProperty Name="rating" ColumnName="rating" />
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -917,13 +1005,12 @@
             <EntityTypeMapping TypeName="Model.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

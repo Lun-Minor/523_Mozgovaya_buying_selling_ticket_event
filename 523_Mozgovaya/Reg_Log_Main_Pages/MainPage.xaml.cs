@@ -24,25 +24,19 @@ namespace _523_Mozgovaya
         public MainPage()
         {
             InitializeComponent();
-            LoadData();
-        }
-        private void LoadData()
-        {
-            // Создаем экземпляр вашего контекста базы данных
-            using (var db = new Entities2())
-            {
-                // Извлекаем данные из таблицы (например, Users) и переводим в список
-                var usersList = db.User.ToList();
-
-                // Привязываем список к DataGrid
-                MyDataGrid.ItemsSource = usersList;
-            }
+           
         }
 
 
+    
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new LoginPage());
+        }
+
+        private void btn_filters_Checked(object sender, RoutedEventArgs e)
+        {
+            popup_filters.IsOpen = !popup_filters.IsOpen;
         }
     }
 }

@@ -16,7 +16,25 @@
         </Grid.RowDefinitions>
         <Frame x:Name="mainframe"/>
         <StackPanel Grid.Row="0" Margin="6" Orientation="Horizontal" HorizontalAlignment="Right">
-            
+            <ToggleButton x:Name="btn_filters"
+              Width="200" Height="30"
+              VerticalAlignment="Center" Margin="5"
+              Content="Фильтры ▾"
+              HorizontalContentAlignment="Left" Checked="btn_filters_Checked"/>
+
+            <Popup x:Name="popup_filters"  StaysOpen="False">
+                <Border Background="White" BorderBrush="Gray" BorderThickness="1" MinWidth="200">
+                    <StackPanel>
+                        <!--временно-->
+                        <CheckBox Content="По названию" Margin="3"/>
+                        <CheckBox Content="По цене" Margin="3"/>
+                        <CheckBox Content="По типу" Margin="3"/>
+                        <CheckBox Content="По размеру" Margin="3"/>
+                        <CheckBox Content="По рейтингу" Margin="3"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
+
             <ComboBox>
                 <ComboBoxItem IsSelected="True">По умолчанию</ComboBoxItem>
                 <ComboBoxItem>По названию</ComboBoxItem>
@@ -29,7 +47,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="6" Orientation="Horizontal" VerticalAlignment="Center">
-            <DataGrid Name="MyDataGrid" AutoGenerateColumns="True" Margin="10"/>
+            <Label Content="Карточки"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _523_Mozgovaya.ClientPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace _523_Mozgovaya
 {
     /// <summary>
@@ -22,7 +24,7 @@ namespace _523_Mozgovaya
     public partial class LoginPage : Page
     {
         private int failedAttempts = 0;
-      //  private User currentUser;
+      
 
         public LoginPage()
         {
@@ -60,7 +62,7 @@ namespace _523_Mozgovaya
 
             string hashedPassword = GetHash(password_box.Password);
 
-            using (var db = new Entities2())
+            using (var db = new Entities())
             {
                 var user = db.User.AsNoTracking().FirstOrDefault(u => u.login == log_tb.Text && u.password == hashedPassword);
 
@@ -83,15 +85,15 @@ namespace _523_Mozgovaya
                 {
                     MessageBox.Show("Пользователь успешно найден!");
 
-                    switch (user.role.ToString())
+                    switch (user.id_role.ToString())
                     {
                         case "3":
                             NavigationService?.Navigate(new UserPage());
                             break;
                         case "1":
-                            NavigationService?.Navigate(new AdminPage());
+                            NavigationService?.Navigate(new AdminPages.AdminPage());
                             break;
-                            case "2": NavigationService?.Navigate(new OrganizatorPage()); break;
+                            case "2": NavigationService?.Navigate(new OrganizatorPages.OrganizatorPage()); break;
 
                     }
                 }
