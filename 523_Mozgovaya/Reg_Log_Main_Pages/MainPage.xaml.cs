@@ -13,30 +13,131 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _523_Mozgovaya;
 
 namespace _523_Mozgovaya
 {
+    public class GenreFilter
+    {
+        public int id_genre { get; set; }
+        public string name { get; set; }        
+        public bool IsSelected { get; set; }    
+    }
     /// <summary>
     /// Логика взаимодействия для MainPage.xaml
     /// </summary>
     public partial class MainPage : Page
     {
+        private List<GenreFilter> genreFilters;
         public MainPage()
         {
             InitializeComponent();
+            var events = Core.entities.Event.ToList();
            
+
+            list_events.ItemsSource = events;
+            genreFilters = Core.entities.Genre.Select(g => new GenreFilter{
+             id_genre = g.id_genre,
+             name = g.name,
+             IsSelected = false}).ToList();
+
+            cbGenres.ItemsSource = genreFilters;
+
+
+            UpdateEvents();
+
+
         }
 
 
+
+     
+
+        private void UpdateEvents()
+        {
+            if (!IsInitialized)
+            {
+                return;
+            }
+            try {
+
+                var events = Core.entities.Event.Include(e => e.Genre).ToList();
+
+                //Поиск
+                if (!string.IsNullOrWhiteSpace(tb_search.Text))
+                {
+                    events = events.Where(x =>x.name != null && x.name.ToLower().Contains(tb_search.Text.ToLower())
+                    ).ToList();
+                }
+
+                //Сортировка 
+                switch (combo_box.SelectedIndex)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                        events = events.OrderBy(x => x.name).ToList();
+                        break;
+                    case 2:
+                        events = events.OrderByDescending(x => x.rating).ToList();
+                        break;
+                }
+
+
+                var selectedIds = genreFilters.Where(g => g.IsSelected).Select(g => g.id_genre).ToList();
+
+                if (selectedIds.Count > 0)
+                {
+                    events = events.Where(e =>e.Genre.Any(g => selectedIds.Contains(g.id_genre))).ToList();
+                }
+
+
+                list_events.ItemsSource = events;
+            }
+            catch { }
+           
+        }
+
+      
     
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            UpdateEvents();
+        }
+        private void cbGenres_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            cbGenres.SelectedIndex = -1;
+            cbGenres.Text = "Фильтры";
+        }
+        private void cbGenres_DropDownClosed(object sender, EventArgs e)
+        {
+            cbGenres.Text = "Фильтры";
+            UpdateEvents();
+        }
+
         private void btn_login_Click(object sender, RoutedEventArgs e)
         {
             NavigationService?.Navigate(new LoginPage());
         }
-
-        private void btn_filters_Checked(object sender, RoutedEventArgs e)
+        private void tb_search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            popup_filters.IsOpen = !popup_filters.IsOpen;
+            UpdateEvents();
+        }
+        private void GenreCheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+
+            UpdateEvents();
+        }
+
+        private void list_events_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selected_event = list_events.SelectedItem as Event;
+            if (selected_event != null) {
+                NavigationService?.Navigate (new EventPage(selected_event));
+            }
         }
     }
+
+
 }

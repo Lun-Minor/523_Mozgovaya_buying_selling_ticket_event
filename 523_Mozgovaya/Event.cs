@@ -30,6 +30,7 @@ namespace _523_Mozgovaya
         public string description { get; set; }
         public int age_limit { get; set; }
         public string cover_image { get; set; }
+        public Nullable<double> rating { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

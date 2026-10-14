@@ -1,0 +1,70 @@
+﻿<Page x:Class="_523_Mozgovaya.ClientPages.ClientPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:_523_Mozgovaya.ClientPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+        <Frame x:Name="mainframe"/>
+        <StackPanel Grid.Row="0" Margin="6" Orientation="Horizontal" HorizontalAlignment="Right">
+
+
+
+            <ComboBox x:Name="cbGenres" Width="200" Margin="5" FontSize="20" IsEditable="True" IsReadOnly="True" Text="Фильтры" SelectionChanged="cbGenres_SelectionChanged" DropDownClosed="cbGenres_DropDownClosed">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding name}" IsChecked="{Binding IsSelected, Mode=TwoWay}" Checked="GenreCheckBox_Changed" Unchecked="GenreCheckBox_Changed" Margin="2"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+
+
+            <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="combo_box" >
+                <ComboBoxItem IsSelected="True">По умолчанию</ComboBoxItem>
+                <ComboBoxItem>По названию</ComboBoxItem>
+                <ComboBoxItem>По рейтингу</ComboBoxItem>
+            </ComboBox>
+            <TextBlock Text="поиск" FontSize="20" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="tb_search" ToolTip="введите текст для поиска" Width="250" Height="30" VerticalAlignment="Center" TextChanged="tb_search_TextChanged"/>
+            <Button x:Name="btn_profile" Content="профиль" Click="btn_profile_Click" Margin="5"/>
+        </StackPanel>
+
+
+
+        <ListView Name="list_events" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="list_events_MouseDoubleClick">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" >
+
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Gray" >
+                        <StackPanel>
+                            <Image Source="{Binding cover_image}" Width="200" Height="300" Stretch="UniformToFill"/>
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding name}" HorizontalAlignment="Center" Margin="5" />
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Center" Text="{Binding age_limit, StringFormat='Возраст +{0}'}" Margin="5"/>
+                            <TextBlock Text="{Binding rating, StringFormat='Рейтинг {0}'}"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+
+    </Grid>
+</Page>
+

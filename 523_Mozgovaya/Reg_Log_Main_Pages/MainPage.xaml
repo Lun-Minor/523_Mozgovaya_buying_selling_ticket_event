@@ -16,38 +16,54 @@
         </Grid.RowDefinitions>
         <Frame x:Name="mainframe"/>
         <StackPanel Grid.Row="0" Margin="6" Orientation="Horizontal" HorizontalAlignment="Right">
-            <ToggleButton x:Name="btn_filters"
-              Width="200" Height="30"
-              VerticalAlignment="Center" Margin="5"
-              Content="Фильтры ▾"
-              HorizontalContentAlignment="Left" Checked="btn_filters_Checked"/>
 
-            <Popup x:Name="popup_filters"  StaysOpen="False">
-                <Border Background="White" BorderBrush="Gray" BorderThickness="1" MinWidth="200">
-                    <StackPanel>
-                        <!--временно-->
-                        <CheckBox Content="По названию" Margin="3"/>
-                        <CheckBox Content="По цене" Margin="3"/>
-                        <CheckBox Content="По типу" Margin="3"/>
-                        <CheckBox Content="По размеру" Margin="3"/>
-                        <CheckBox Content="По рейтингу" Margin="3"/>
-                    </StackPanel>
-                </Border>
-            </Popup>
 
-            <ComboBox>
+
+            <ComboBox x:Name="cbGenres" Width="200" Margin="5" FontSize="20" IsEditable="True" IsReadOnly="True" Text="Фильтры" SelectionChanged="cbGenres_SelectionChanged" DropDownClosed="cbGenres_DropDownClosed">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding name}" IsChecked="{Binding IsSelected, Mode=TwoWay}" Checked="GenreCheckBox_Changed" Unchecked="GenreCheckBox_Changed" Margin="2"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+
+
+            <ComboBox SelectionChanged="ComboBox_SelectionChanged" x:Name="combo_box" >
                 <ComboBoxItem IsSelected="True">По умолчанию</ComboBoxItem>
                 <ComboBoxItem>По названию</ComboBoxItem>
                 <ComboBoxItem>По рейтингу</ComboBoxItem>
-                <ComboBoxItem>По цене</ComboBoxItem> 
             </ComboBox>
                 <TextBlock Text="поиск" FontSize="20" VerticalAlignment="Center" Margin="5"/>
-            <TextBox x:Name="tb_search" ToolTip="введите текст для поиска" Width="250" Height="30" VerticalAlignment="Center"/>
+            <TextBox x:Name="tb_search" ToolTip="введите текст для поиска" Width="250" Height="30" VerticalAlignment="Center" TextChanged="tb_search_TextChanged"/>
             <Button x:Name="btn_login" Content="вход" Click="btn_login_Click" Margin="5"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Margin="6" Orientation="Horizontal" VerticalAlignment="Center">
-            <Label Content="Карточки"/>
-        </StackPanel>
+
+
+        <ListView Name="list_events" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MouseDoubleClick="list_events_MouseDoubleClick">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" >
+                        
+                    </WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Gray" >
+                        <StackPanel>
+                            <Image Source="{Binding cover_image}" Width="200" Height="300" Stretch="UniformToFill"/>
+                            <TextBlock VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding name}" HorizontalAlignment="Center" Margin="5" />
+                        <TextBlock VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Center" Text="{Binding age_limit, StringFormat='Возраст +{0}'}" Margin="5"/>
+                            <TextBlock Text="{Binding rating, StringFormat='Рейтинг {0}'}"/>
+                        </StackPanel>
+                        </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+                        
+                    </ListView>
+
+
     </Grid>
 </Page>

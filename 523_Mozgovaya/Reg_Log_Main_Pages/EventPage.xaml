@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EventPage" Background="White">
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="400"/>
             <RowDefinition Height="*"/>
@@ -18,18 +18,17 @@
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <StackPanel x:Name="current_event"></StackPanel>
             <Border BorderBrush="Black" BorderThickness="1" Margin="10" Grid.Row="0" Grid.Column="0">
-              
-                    <TextBlock Text="картинка_картинкакартинкакартинкакартинкакартинкакартинка" TextWrapping="Wrap"/>
-               
+                <Image Source="{Binding cover_image}" Width="200" Height="300" Stretch="UniformToFill"/>
             </Border>
             <StackPanel Grid.Column="1" Grid.Row="1" >
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="название" Margin="3" />
+                    <TextBlock  TextWrapping="Wrap" Text="{Binding name}" Margin="5" FontSize="25"/>
                     <Button x:Name="loved" Content="добавить в избранное" Margin="140, 0" Width="240"/>
                 </StackPanel>
                     
-                <TextBlock Text="описание" Height="150"/>
+                <TextBlock Text="{Binding description}" Height="150"/>
                 <ComboBox Width="50" HorizontalAlignment="Left">
                     <ComboBoxItem>1</ComboBoxItem>
                     <ComboBoxItem>2</ComboBoxItem>

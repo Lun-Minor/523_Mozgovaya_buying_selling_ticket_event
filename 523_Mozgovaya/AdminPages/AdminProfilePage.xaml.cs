@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace _523_Mozgovaya
+namespace _523_Mozgovaya.AdminPages
 {
     /// <summary>
-    /// Логика взаимодействия для EventPage.xaml
+    /// Логика взаимодействия для AdminProfilePage.xaml
     /// </summary>
-    public partial class EventPage : Page
+    public partial class AdminProfilePage : Page
     {
-        public EventPage()
+        public AdminProfilePage()
         {
             InitializeComponent();
         }

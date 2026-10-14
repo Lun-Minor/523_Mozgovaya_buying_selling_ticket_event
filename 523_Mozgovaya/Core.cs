@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace _523_Mozgovaya
 {
-    public class Core
+    public static class Core
     {
-        public static List<Entities>  entities = new List<Entities>();
+        public static Entities entities = new Entities();
     }
 }

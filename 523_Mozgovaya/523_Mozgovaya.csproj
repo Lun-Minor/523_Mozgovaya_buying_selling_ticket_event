@@ -66,17 +66,26 @@
     <Compile Include="AdminPages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\AdminProfilePage.xaml.cs">
+      <DependentUpon>AdminProfilePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ClientPages\UserPage.xaml.cs">
-      <DependentUpon>UserPage.xaml</DependentUpon>
+    <Compile Include="ClientPages\ClientPage.xaml.cs">
+      <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="data_base\Core.cs" />
+    <Compile Include="ClientPages\ProfileClientPage.xaml.cs">
+      <DependentUpon>ProfileClientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core.cs" />
     <Compile Include="Event.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="EventPage.xaml.cs">
+    <Compile Include="OrganizatorPages\OrganizatorProfilePage.xaml.cs">
+      <DependentUpon>OrganizatorProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Reg_Log_Main_Pages\EventPage.xaml.cs">
       <DependentUpon>EventPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Genre.cs">
@@ -146,11 +155,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ClientPages\UserPage.xaml">
+    <Page Include="AdminPages\AdminProfilePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EventPage.xaml">
+    <Page Include="ClientPages\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientPages\ProfileClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OrganizatorPages\OrganizatorProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Reg_Log_Main_Pages\EventPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,6 +256,13 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="res\art.jpg" />
+    <Resource Include="res\symphony.jpg" />
+    <Resource Include="res\theater.jpg" />
+    <Resource Include="res\rock.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data_base\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

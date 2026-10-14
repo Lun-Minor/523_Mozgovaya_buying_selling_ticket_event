@@ -1,4 +1,5 @@
-﻿using _523_Mozgovaya.ClientPages;
+﻿using _523_Mozgovaya.AdminPages;
+using _523_Mozgovaya.ClientPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,10 +89,10 @@ namespace _523_Mozgovaya
                     switch (user.id_role.ToString())
                     {
                         case "3":
-                            NavigationService?.Navigate(new UserPage());
+                            object value = NavigationService?.Navigate(new ClientPage());
                             break;
                         case "1":
-                            NavigationService?.Navigate(new AdminPages.AdminPage());
+                            NavigationService?.Navigate(new AdminPage());
                             break;
                             case "2": NavigationService?.Navigate(new OrganizatorPages.OrganizatorPage()); break;
 

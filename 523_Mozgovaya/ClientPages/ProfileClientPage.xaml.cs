@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace _523_Mozgovaya.ClientPages
 {
     /// <summary>
-    /// Логика взаимодействия для UserPage.xaml
+    /// Логика взаимодействия для ProfileClientPage.xaml
     /// </summary>
-    public partial class UserPage : Page
+    public partial class ProfileClientPage : Page
     {
-        public UserPage()
+        public ProfileClientPage()
         {
             InitializeComponent();
         }
