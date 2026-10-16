@@ -128,12 +128,7 @@ namespace _523_Mozgovaya.AdminPages
 
         private void loved_Click(object sender, RoutedEventArgs e)
         {
-            if (!CurrentUser.IsLoggedIn)
-            {
-                MessageBox.Show("Войдите в аккаунт!");
-
-                NavigationService?.Navigate(new LoginPage());
-            }
+           
 
             var user = Core.entities.User.Include(u => u.Event).FirstOrDefault(u => u.id_user == CurrentUser.IdUser);
 
@@ -159,12 +154,7 @@ namespace _523_Mozgovaya.AdminPages
 
         private void btnBuyTickets_Click(object sender, RoutedEventArgs e)
         {
-            if (!CurrentUser.IsLoggedIn)
-            {
-                MessageBox.Show("Для покупки билетов нужно войти в аккаунт!");
-                NavigationService?.Navigate(new LoginPage());
-                return;
-            }
+           
             NavigationService?.Navigate(new TicketPage(currentEvent));
         }
 

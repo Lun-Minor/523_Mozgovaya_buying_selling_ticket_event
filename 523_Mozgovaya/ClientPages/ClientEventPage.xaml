@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.ClientPages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1100"
-      Title="ClientEventPage">
+      Title="ClientEventPage" >
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -25,7 +25,7 @@
                 <Image Source="{Binding cover_image}" Width="300" Stretch="UniformToFill"/>
             </Border>
 
-            <StackPanel Grid.Column="1" Margin="20,0,0,0">
+            <StackPanel Grid.Column="1" Margin="20">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

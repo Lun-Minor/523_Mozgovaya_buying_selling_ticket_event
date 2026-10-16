@@ -63,6 +63,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminPages\AdminLovedPage.xaml.cs">
+      <DependentUpon>AdminLovedPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminPages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,9 @@
     <Compile Include="ClientPages\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClientPages\LovedClientPage.xaml.cs">
+      <DependentUpon>LovedClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClientPages\ProfileClientPage.xaml.cs">
       <DependentUpon>ProfileClientPage.xaml</DependentUpon>
     </Compile>
@@ -88,6 +94,9 @@
     <Compile Include="CurrentUser.cs" />
     <Compile Include="Event.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\OrganixatorLovedPage.xaml.cs">
+      <DependentUpon>OrganixatorLovedPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrganizatorPages\OrganizatorEventPage.xaml.cs">
       <DependentUpon>OrganizatorEventPage.xaml</DependentUpon>
@@ -164,6 +173,10 @@
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Page Include="AdminPages\AdminLovedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminPages\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -184,7 +197,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ClientPages\LovedClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ClientPages\ProfileClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OrganizatorPages\OrganixatorLovedPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
