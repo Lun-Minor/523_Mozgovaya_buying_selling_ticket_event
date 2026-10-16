@@ -5,45 +5,120 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_523_Mozgovaya"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700" d:DesignWidth="1100"
       Title="EventPage" Background="White">
 
-    <Grid >
+    <Grid Margin="15">
         <Grid.RowDefinitions>
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="10">
+
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="320"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel x:Name="current_event"></StackPanel>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="10" Grid.Row="0" Grid.Column="0">
-                <Image Source="{Binding cover_image}" Width="200" Height="300" Stretch="UniformToFill"/>
+
+
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1">
+                <Image Source="{Binding cover_image}" Width="300" Stretch="UniformToFill"/>
             </Border>
-            <StackPanel Grid.Column="1" Grid.Row="1" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock  TextWrapping="Wrap" Text="{Binding name}" Margin="5" FontSize="25"/>
-                    <Button x:Name="loved" Content="добавить в избранное" Margin="140, 0" Width="240"/>
+
+            <StackPanel Grid.Column="1" Margin="20,0,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="{Binding name}"  FontSize="26" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Center"/>
+
+                    <Button Grid.Column="1" x:Name="loved"  Content="добавить в избранное"  Width="250" Height="35" Margin="5" Click="loved_Click"/>
+                </Grid>
+
+
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock Text="{Binding rating, StringFormat='★ {0:F1}'}" FontSize="16" Foreground="Orange" Margin="5"/>
+                    <TextBlock Text="{Binding age_limit, StringFormat='возрастное ограничение +{0}'}" FontSize="16" Margin="5"/>
                 </StackPanel>
-                    
-                <TextBlock Text="{Binding description}" Height="150"/>
-                <ComboBox Width="50" HorizontalAlignment="Left">
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                    <ComboBoxItem>4</ComboBoxItem>
-                    <ComboBoxItem>5</ComboBoxItem>
-                    <ComboBoxItem>6</ComboBoxItem>
-                    <ComboBoxItem>7</ComboBoxItem>
-                    <ComboBoxItem>8</ComboBoxItem>
-                    <ComboBoxItem>9</ComboBoxItem>
-                    <ComboBoxItem IsSelected="True">10</ComboBoxItem>
-                </ComboBox>
+                <TextBlock x:Name="tb_category" FontSize="14"  Margin="0,10"/>
+                <TextBlock x:Name="tb_genre" FontSize="14" TextWrapping="Wrap" Margin="0,5"/>
+                <TextBlock Text="{Binding description}"  TextWrapping="Wrap" FontSize="14" Margin="0,15"/>
             </StackPanel>
-            
         </Grid>
+
+        
+        <Grid Grid.Row="1" Margin="0,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            
+            <TextBlock Grid.Row="0"  Text="Отзывы" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            
+            <Border Grid.Row="1"  BorderBrush="Gray" BorderThickness="1"  Margin="0,0,0,10">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Оставьте свой отзыв:" FontSize="14" Margin="0,0,0,5"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Оценка:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <ComboBox Grid.Column="1" x:Name="cbRating" Width="70" HorizontalAlignment="Left" SelectedIndex="9">
+                            <ComboBoxItem>1</ComboBoxItem>
+                            <ComboBoxItem>2</ComboBoxItem>
+                            <ComboBoxItem>3</ComboBoxItem>
+                            <ComboBoxItem>4</ComboBoxItem>
+                            <ComboBoxItem>5</ComboBoxItem>
+                            <ComboBoxItem>6</ComboBoxItem>
+                            <ComboBoxItem>7</ComboBoxItem>
+                            <ComboBoxItem>8</ComboBoxItem>
+                            <ComboBoxItem>9</ComboBoxItem>
+                            <ComboBoxItem>10</ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
+
+                    <TextBox x:Name="tb_review" Height="60" Margin="0,10,0,10" FontSize="15" BorderBrush="Gray" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" ToolTip="Напишите ваш отзыв" Background="White"/>
+                    <Button Content="Отправить отзыв"  Width="160" Height="35" HorizontalAlignment="Right" Click="btnSubmitReview_Click"/>
+                </StackPanel>
+            </Border>
+
+
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <ListView x:Name="list_review" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="Gray" Margin="5" Width="280" Background="White">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding name}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,5"/>
+                                    <TextBlock Text="{Binding comment}"  TextWrapping="Wrap" FontSize="13" Margin="0,0,0,5"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding rating, StringFormat='★ {0}/10'}"  Foreground="Orange" FontWeight="Bold" FontSize="12"/>
+                                        <TextBlock Text="{Binding created_at, StringFormat='   {0:dd.MM.yyyy}'}" Foreground="Gray" FontSize="12"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+            
+                <Button Grid.Row="3" Content="Купить билеты" Width="200" Height="30" HorizontalAlignment="Right" Margin="0,15" FontSize="16" Click="btnBuyTickets_Click"/>
+                <Button Grid.Row="3" Content="назад" Width="200" Height="30" HorizontalAlignment="Left" Margin="0,15" FontSize="16" Click="Button_Click"/>
+            </Grid>
     </Grid>
-    
 </Page>

@@ -30,7 +30,7 @@
             <PropertyRef Name="id_event" />
             <PropertyRef Name="id_genre" />
           </Key>
-          <Property Name="id_event" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_event" Type="int" Nullable="false" />
           <Property Name="id_genre" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Favorite">
@@ -38,7 +38,7 @@
             <PropertyRef Name="id_user" />
             <PropertyRef Name="id_event" />
           </Key>
-          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
           <Property Name="id_event" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Genre">
@@ -171,7 +171,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__EventGenr__id_ev__60A75C0F">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="EventGenre" Type="Self.EventGenre" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Event">
@@ -194,20 +196,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Favorite__id_eve__5EBF139D">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
-          <End Role="Favorite" Type="Self.Favorite" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Event">
-              <PropertyRef Name="id_event" />
-            </Principal>
-            <Dependent Role="Favorite">
-              <PropertyRef Name="id_event" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Review__id_event__5BE2A6F2">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Event">
@@ -219,7 +211,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Session__id_even__5441852A">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Session" Type="Self.Session" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Event">
@@ -267,7 +261,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Ticket__id_ticke__5812160E">
-          <End Role="TicketCategory" Type="Self.TicketCategory" Multiplicity="1" />
+          <End Role="TicketCategory" Type="Self.TicketCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TicketCategory">
@@ -279,7 +275,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__TicketCat__id_se__571DF1D5">
-          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TicketCategory" Type="Self.TicketCategory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Session">
@@ -299,6 +297,20 @@
             </Principal>
             <Dependent Role="Event">
               <PropertyRef Name="id_organizer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favorite_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Favorite" Type="Self.Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="id_event" />
+            </Principal>
+            <Dependent Role="Favorite">
+              <PropertyRef Name="id_event" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -391,10 +403,6 @@
             <End Role="Genre" EntitySet="Genre" />
             <End Role="EventGenre" EntitySet="EventGenre" />
           </AssociationSet>
-          <AssociationSet Name="FK__Favorite__id_eve__5EBF139D" Association="Self.FK__Favorite__id_eve__5EBF139D">
-            <End Role="Event" EntitySet="Event" />
-            <End Role="Favorite" EntitySet="Favorite" />
-          </AssociationSet>
           <AssociationSet Name="FK__Review__id_event__5BE2A6F2" Association="Self.FK__Review__id_event__5BE2A6F2">
             <End Role="Event" EntitySet="Event" />
             <End Role="Review" EntitySet="Review" />
@@ -426,6 +434,10 @@
           <AssociationSet Name="FK_Event_Organizer" Association="Self.FK_Event_Organizer">
             <End Role="Organizer" EntitySet="Organizer" />
             <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favorite_Event" Association="Self.FK_Favorite_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Favorite" EntitySet="Favorite" />
           </AssociationSet>
           <AssociationSet Name="FK_Favorite_User" Association="Self.FK_Favorite_User">
             <End Role="User" EntitySet="User" />

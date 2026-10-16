@@ -56,7 +56,7 @@
                             <Image Source="{Binding cover_image}" Width="200" Height="300" Stretch="UniformToFill"/>
                             <TextBlock VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding name}" HorizontalAlignment="Center" Margin="5" />
                             <TextBlock VerticalAlignment="Center" TextAlignment="Left" HorizontalAlignment="Center" Text="{Binding age_limit, StringFormat='Возраст +{0}'}" Margin="5"/>
-                            <TextBlock Text="{Binding rating, StringFormat='Рейтинг {0}'}"/>
+                            <TextBlock Text="{Binding rating, StringFormat='★ {0:F1}'}"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>

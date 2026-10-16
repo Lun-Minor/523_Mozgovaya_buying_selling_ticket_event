@@ -85,6 +85,10 @@ namespace _523_Mozgovaya
                 else
                 {
                     MessageBox.Show("Пользователь успешно найден!");
+                    CurrentUser.IdUser = user.id_user;
+                    CurrentUser.Login = user.login;
+                    CurrentUser.FullName = $"{user.surname} {user.name} {user.last_name}".Trim();
+                    CurrentUser.IdRole = user.id_role;
 
                     switch (user.id_role.ToString())
                     {

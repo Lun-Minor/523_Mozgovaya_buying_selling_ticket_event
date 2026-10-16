@@ -36,6 +36,7 @@ namespace _523_Mozgovaya
            
 
             list_events.ItemsSource = events;
+
             genreFilters = Core.entities.Genre.Select(g => new GenreFilter{
              id_genre = g.id_genre,
              name = g.name,
