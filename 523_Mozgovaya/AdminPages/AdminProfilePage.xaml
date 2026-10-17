@@ -5,10 +5,71 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_523_Mozgovaya.AdminPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AdminProfilePage">
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="AdminProfilePage" Background="White">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <Grid>
-        
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="Личный кабинет" FontSize="26" FontWeight="Bold" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Content="Назад" Width="100" Height="35" Click="btnBack_Click"/>
+                <Button Content="Избранное" HorizontalAlignment="Right" Margin="4" Height="35"  x:Name="bt_loved" Click="bt_loved_Click"/>
+                <Button Content="заявки" HorizontalAlignment="Right" Margin="4" Height="35"  Width="90" x:Name="bt_zavki" Click="bt_zavki_Click"/>
+            </StackPanel>
+            
+        </Grid>
+
+
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Margin="0,0,0,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Name="tbFullName" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="Всего заказов:" FontSize="14" />
+                    <TextBlock x:Name="tbOrdersCount" FontSize="22" FontWeight="Bold"/>
+
+                    <TextBlock Text="Общая сумма покупок:" FontSize="14" Margin="0,10"/>
+                    <TextBlock x:Name="tbTotalSpent" FontSize="22" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+
+        <TextBlock Grid.Row="2" Text="История заказов" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+
+        <ListView Grid.Row="3" x:Name="lvOrders" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№ заказа" Width="90" DisplayMemberBinding="{Binding OrderId}"/>
+                    <GridViewColumn Header="Мероприятие" Width="300" DisplayMemberBinding="{Binding EventName}"/>
+                    <GridViewColumn Header="Сессия" Width="160" DisplayMemberBinding="{Binding SessionTime}"/>
+                    <GridViewColumn Header="Дата заказа" Width="140" DisplayMemberBinding="{Binding OrderDate}"/>
+                    <GridViewColumn Header="Билетов" Width="80" DisplayMemberBinding="{Binding TicketsCount}"/>
+                    <GridViewColumn Header="Сумма" Width="120" DisplayMemberBinding="{Binding TotalSum}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+        <TextBlock Grid.Row="3" x:Name="tbEmptyOrders" Text="У вас пока нет заказов" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
     </Grid>
 </Page>

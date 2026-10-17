@@ -87,5 +87,10 @@ namespace _523_Mozgovaya.ClientPages
         {
             NavigationService?.Navigate(new LovedClientPage());
         }
+
+        private void bt_zavki_Click(object sender, RoutedEventArgs e)
+        {
+            //
+        }
     }
 }

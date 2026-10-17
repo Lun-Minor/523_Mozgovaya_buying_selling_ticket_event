@@ -72,6 +72,9 @@
     <Compile Include="AdminPages\AdminProfilePage.xaml.cs">
       <DependentUpon>AdminProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\AdminTicketPage.xaml.cs">
+      <DependentUpon>AdminTicketPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminPages\EventAdminPage.xaml.cs">
       <DependentUpon>EventAdminPage.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,9 @@
     </Compile>
     <Compile Include="ClientPages\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPages\ClientTicketPage.xaml.cs">
+      <DependentUpon>ClientTicketPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClientPages\LovedClientPage.xaml.cs">
       <DependentUpon>LovedClientPage.xaml</DependentUpon>
@@ -103,6 +109,9 @@
     </Compile>
     <Compile Include="OrganizatorPages\OrganizatorProfilePage.xaml.cs">
       <DependentUpon>OrganizatorProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\TicketOrganizatorPage.xaml.cs">
+      <DependentUpon>TicketOrganizatorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reg_Log_Main_Pages\EventPage.xaml.cs">
       <DependentUpon>EventPage.xaml</DependentUpon>
@@ -167,9 +176,6 @@
     <Compile Include="TicketCategory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="TicketPage.xaml.cs">
-      <DependentUpon>TicketPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -185,6 +191,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdminPages\AdminTicketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminPages\EventAdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ClientPages\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientPages\ClientTicketPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OrganizatorPages\OrganizatorProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OrganizatorPages\TicketOrganizatorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,10 +268,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="style\Dictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TicketPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

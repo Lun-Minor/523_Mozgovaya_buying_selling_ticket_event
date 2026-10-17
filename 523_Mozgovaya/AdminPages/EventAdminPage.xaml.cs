@@ -79,16 +79,6 @@ namespace _523_Mozgovaya.AdminPages
 
         private void btnSubmitReview_Click(object sender, RoutedEventArgs e)
         {
-            if (!CurrentUser.IsLoggedIn)
-            {
-                MessageBox.Show("Чтобы оставить отзыв, войдите в аккаунт");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(tb_review.Text))
-            {
-                MessageBox.Show("Введите текст отзыва");
-                return;
-            }
 
             int rating = 10;
             if (cbRating.SelectedItem is ComboBoxItem item)
@@ -155,7 +145,7 @@ namespace _523_Mozgovaya.AdminPages
         private void btnBuyTickets_Click(object sender, RoutedEventArgs e)
         {
            
-            NavigationService?.Navigate(new TicketPage(currentEvent));
+            NavigationService?.Navigate(new AdminTicketPage(currentEvent));
         }
 
 

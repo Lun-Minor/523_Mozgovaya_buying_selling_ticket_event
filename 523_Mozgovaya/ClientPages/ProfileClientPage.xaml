@@ -23,9 +23,12 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Личный кабинет" FontSize="26" FontWeight="Bold" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Content="Назад" Width="100" Height="35" Click="btnBack_Click"/>
+                <Button Content="Избранное" HorizontalAlignment="Right" Margin="4" Height="35"  x:Name="bt_loved" Click="bt_loved_Click"/>
+                <Button Content="заявка на организатора" HorizontalAlignment="Right" Margin="4" Height="35"  Width="250" x:Name="bt_zavki" Click="bt_zavki_Click"/>
+            </StackPanel>
 
-            <Button Grid.Column="1" Content="Назад" Width="100" Height="35" Click="btnBack_Click"/>
-            <Button Content="Избранное" HorizontalAlignment="Right" Margin="4" Height="35"  x:Name="bt_loved" Click="bt_loved_Click"/>
         </Grid>
 
 
@@ -50,10 +53,10 @@
             </Grid>
         </Border>
 
-        
+
         <TextBlock Grid.Row="2" Text="История заказов" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
 
-        
+
         <ListView Grid.Row="3" x:Name="lvOrders" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView>
@@ -67,7 +70,7 @@
             </ListView.View>
         </ListView>
 
-        
+
         <TextBlock Grid.Row="3" x:Name="tbEmptyOrders" Text="У вас пока нет заказов" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
     </Grid>
 </Page>

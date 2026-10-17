@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Entity;
+using _523_Mozgovaya.ClientPages;
 
 
 namespace _523_Mozgovaya
@@ -163,7 +164,7 @@ namespace _523_Mozgovaya
                 NavigationService?.Navigate(new LoginPage());
                 return;
             }
-            NavigationService?.Navigate(new TicketPage(currentEvent));
+            NavigationService?.Navigate(new ClientTicketPage(currentEvent));
         }
 
     
