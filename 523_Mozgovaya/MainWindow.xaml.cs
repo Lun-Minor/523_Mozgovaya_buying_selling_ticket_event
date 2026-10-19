@@ -35,5 +35,27 @@ namespace _523_Mozgovaya
                 this.Title = page.Title;
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите закрыть окно?", "Message",
+                MessageBoxButton.YesNo) == MessageBoxResult.No)
+                e.Cancel = true;
+            else
+                e.Cancel = false;
+        }
+
+      
+
+        private void cbTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
+            
+            var uri = new Uri(cbTheme.SelectedIndex == 0 ? "/style/Dictionary.xaml" : "/style/OwnDictionary.xaml", UriKind.Relative);
+            
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+        }
     }
 }

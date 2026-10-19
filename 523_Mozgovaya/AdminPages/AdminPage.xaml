@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.AdminPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Каталог" Background="White">
+      Title="Каталог" Background="{DynamicResource PageBackground}">
 
     <Grid>
         <Grid.RowDefinitions>

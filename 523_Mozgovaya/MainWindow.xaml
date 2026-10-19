@@ -6,9 +6,22 @@
         xmlns:local="clr-namespace:_523_Mozgovaya"
         mc:Ignorable="d"
         Height="450" Width="800"
-        Title="window">
+        Title="window"  Closing="Window_Closing" 
+        >
 
-    <Grid>
-        <Frame x:Name="mainframe" NavigationUIVisibility="Hidden"/>
+    <Grid Background="{DynamicResource PageBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="cbTheme" Width="150" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0" SelectedIndex="0" ToolTip="Выбор темы оформления" SelectionChanged="cbTheme_SelectionChanged">
+            <ComboBoxItem Content="Светлая"/>
+            <ComboBoxItem Content="Синяя"/>
+        </ComboBox>
+
+        <Frame x:Name="mainframe" Grid.Row="1" NavigationUIVisibility="Hidden"/>
+
+       
     </Grid>
 </Window>

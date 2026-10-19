@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.AdminPages"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1200"
-      Title="Профиль администратора" Background="White">
+      Title="Профиль администратора" Background="{DynamicResource PageBackground}">
     <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

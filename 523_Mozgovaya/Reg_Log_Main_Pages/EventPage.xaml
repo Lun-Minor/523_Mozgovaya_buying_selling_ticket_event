@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1100"
-      Title="О мероприятии" Background="White">
+      Title="О мероприятии" Background="{DynamicResource PageBackground}">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -87,7 +87,7 @@
                         </ComboBox>
                     </Grid>
 
-                    <TextBox x:Name="tb_review" Height="60" Margin="0,10,0,10" FontSize="15" BorderBrush="Gray" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" ToolTip="Напишите ваш отзыв" Background="White"/>
+                    <TextBox x:Name="tb_review" Height="60" Margin="0,10,0,10" FontSize="15" BorderBrush="Gray" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" ToolTip="Напишите ваш отзыв" Background="{DynamicResource PageBackground}"/>
                     <Button Content="Отправить отзыв"  Width="160" Height="35" HorizontalAlignment="Right" Click="btnSubmitReview_Click"/>
                 </StackPanel>
             </Border>
@@ -102,7 +102,7 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderThickness="1" BorderBrush="Gray" Margin="5" Width="280" Background="White">
+                            <Border BorderThickness="1" BorderBrush="Gray" Margin="5" Width="280" Background="{DynamicResource PageBackground}">
                                 <StackPanel>
                                     <TextBlock Text="{Binding name}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,5"/>
                                     <TextBlock Text="{Binding comment}"  TextWrapping="Wrap" FontSize="13" Margin="0,0,0,5"/>

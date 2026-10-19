@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.AdminPages"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
-      Title="Заявки" Background="White">
+      Title="Заявки" Background="{DynamicResource PageBackground}">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>

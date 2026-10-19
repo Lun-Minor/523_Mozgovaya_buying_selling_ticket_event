@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.ClientPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Запрос на роль организатора" Background="White">
+      Title="Запрос на роль организатора" Background="{DynamicResource PageBackground}">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>

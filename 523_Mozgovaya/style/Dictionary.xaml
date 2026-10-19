@@ -1,28 +1,51 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="PageBackground" Color="#FFFFFF"/>
+
     <Style TargetType="Button">
         <Setter Property="Height" Value="30"/>
+        <Setter Property="FontFamily" Value="Open Sans, Segoe UI"/>
         <Setter Property="FontSize" Value="15pt"/>
-        <Setter Property="Background" Value="WhiteSmoke"/>
-        <Setter Property="Foreground" Value="Black"/>
-        
+        <Setter Property="Background" Value="#F5F5F5"/>
+        <Setter Property="Foreground" Value="#1E1E1E"/>
     </Style>
 
-
-    <Style
-TargetType="TextBox">
+    <Style TargetType="TextBox">
         <Setter Property="Height" Value="30"/>
+        <Setter Property="FontFamily" Value="Open Sans, Segoe UI"/>
         <Setter Property="FontSize" Value="15pt"/>
-        <Setter Property="Background" Value="#eaebed"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="#EAEBED"/>
+        <Setter Property="Foreground" Value="#1E1E1E"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
-    
+
+    <Style TargetType="PasswordBox">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontFamily" Value="Open Sans, Segoe UI"/>
+        <Setter Property="FontSize" Value="15pt"/>
+        <Setter Property="Background" Value="#EAEBED"/>
+        <Setter Property="Foreground" Value="#1E1E1E"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
     <Style TargetType="TextBlock">
-      
+        <Setter Property="FontFamily" Value="Open Sans, Segoe UI"/>
         <Setter Property="FontSize" Value="15pt"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Foreground" Value="#1E1E1E"/>
     </Style>
 
-   
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="Open Sans, Segoe UI"/>
+        <Setter Property="Foreground" Value="#1E1E1E"/>
+    </Style>
 
+    <Style TargetType="ComboBox">
+        <Setter Property="FontFamily" Value="Open Sans, Segoe UI"/>
+        <Setter Property="Foreground" Value="#1E1E1E"/>
+    </Style>
+
+    <Style TargetType="ListView">
+        <Setter Property="Background" Value="{DynamicResource PageBackground}"/>
+        <Setter Property="Foreground" Value="#1E1E1E"/>
+    </Style>
 </ResourceDictionary>

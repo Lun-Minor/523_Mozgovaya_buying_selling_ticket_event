@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.AdminPages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1000"
-      Title="Редактирование мероприятия" Background="White">
+      Title="Редактирование мероприятия" Background="{DynamicResource PageBackground}">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>

@@ -30,6 +30,7 @@ namespace _523_Mozgovaya
         {
             if (string.IsNullOrEmpty(tb_login.Text) ||
                 string.IsNullOrEmpty(tb_name.Text) 
+                || string.IsNullOrWhiteSpace(tb_surname.Text)
                 || string.IsNullOrEmpty(pas_box.Password) 
                 || string.IsNullOrEmpty(pas_box2.Password))
             {

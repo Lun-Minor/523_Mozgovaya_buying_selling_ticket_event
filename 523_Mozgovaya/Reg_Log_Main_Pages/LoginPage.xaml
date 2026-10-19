@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="600"
-      Title="Авторизация" Background="White">
+      Title="Авторизация" Background="{DynamicResource PageBackground}">
 
 
     <Grid>
@@ -16,7 +16,7 @@
                 <TextBlock Text="Введите логин" HorizontalAlignment="Center"/>
                 <TextBox x:Name="log_tb" Height="30" Width="200" HorizontalAlignment="Center" ToolTip="поле для ввода логина"/>
                 <TextBlock Text="Введите пароль" HorizontalAlignment="Center"/>
-                <PasswordBox x:Name="password_box" Height="30" Width="200" HorizontalAlignment="Center" Background="WhiteSmoke" ToolTip="поле для ввода пароля" />
+                <PasswordBox x:Name="password_box" Height="30" Width="200" HorizontalAlignment="Center" Background="{DynamicResource PageBackground}" ToolTip="поле для ввода пароля" />
             </StackPanel>
 
             <StackPanel Margin="20,10,10,0" Orientation="Horizontal">
@@ -35,10 +35,10 @@
         <StackPanel x:Name="captchaPanel" Visibility="Hidden"
             Width="280"
             HorizontalAlignment="Center" VerticalAlignment="Center"
-            Background="White"
+            Background="{DynamicResource PageBackground}"
             Panel.ZIndex="10">
 
-            <Border Background="White" BorderBrush="Gray" BorderThickness="1">
+            <Border Background="{DynamicResource PageBackground}" BorderBrush="Gray" BorderThickness="1">
                 <StackPanel Margin="5">
                     <Label Content="введите код с картинки"
                    FontSize="13" HorizontalAlignment="Center"/>
