@@ -261,7 +261,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Ticket__id_order__59FA5E80">
-          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -327,7 +329,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Favorite_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Favorite" Type="Self.Favorite" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -339,7 +343,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -351,7 +357,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Organizer_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Organizer" Type="Self.Organizer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -377,7 +385,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Review_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">

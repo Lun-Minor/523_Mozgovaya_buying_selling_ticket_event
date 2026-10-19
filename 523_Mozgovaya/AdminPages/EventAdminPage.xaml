@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
       Title="О мероприятии" Background="{DynamicResource PageBackground}">
-
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -98,8 +98,8 @@
             </Border>
 
 
-            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
-                <ListView x:Name="list_review" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                    <ListView Grid.Row="2" x:Name="list_review" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel Orientation="Horizontal"/>
@@ -120,10 +120,11 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </ScrollViewer>
+            
 
             <Button Grid.Row="3" Content="Купить билеты" Width="200" Height="30" HorizontalAlignment="Right" Margin="0,15" FontSize="16" Click="btnBuyTickets_Click"/>
             <Button Grid.Row="3" Content="назад" Width="200" Height="30" HorizontalAlignment="Left" Margin="0,15" FontSize="16" Click="Button_Click"/>
         </Grid>
     </Grid>
+    </ScrollViewer>
 </Page>
