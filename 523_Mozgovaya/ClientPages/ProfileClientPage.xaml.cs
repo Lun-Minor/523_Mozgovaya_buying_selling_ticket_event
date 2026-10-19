@@ -97,5 +97,19 @@ namespace _523_Mozgovaya.ClientPages
         {
             NavigationService?.Navigate(new ChangePasswordClientPage());
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Вы уверены, что хотите выйти из аккаунта?", "Выход", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                CurrentUser.IdUser = 0;
+                CurrentUser.Login = null;
+                CurrentUser.FullName = null;
+                CurrentUser.IdRole = 0;
+                NavigationService?.Navigate(new LoginPage());
+            }
+        }
     }
 }

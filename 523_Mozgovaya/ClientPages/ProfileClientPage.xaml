@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_523_Mozgovaya.ClientPages"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1000" Background="White"
+      d:DesignHeight="600" d:DesignWidth="1200" Background="White"
       Title="ProfileClientPage">
 
     <Grid Margin="15">
@@ -28,6 +28,7 @@
                 <Button Content="Избранное" HorizontalAlignment="Right" Margin="4" Height="35"  x:Name="bt_loved" Click="bt_loved_Click"/>
                 <Button Content="Заявка на организатора" HorizontalAlignment="Right" Margin="4" Height="35"  Width="250" x:Name="bt_zavki" Click="bt_zavki_Click"/>
                 <Button Content="Сменить пароль" Margin="4" Height="35"  Width="200" x:Name="bt_change_password" Click="bt_change_password_Click"/>
+                <Button Content="Выйти из аккаунта" Width="200" Height="35" Click="btnLogout_Click" Margin="4"/>
             </StackPanel>
 
         </Grid>
