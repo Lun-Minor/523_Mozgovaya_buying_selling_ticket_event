@@ -112,5 +112,10 @@ namespace _523_Mozgovaya.AdminPages
                 NavigationService?.Navigate(new LoginPage());
             }
         }
+
+        private void bt_charts_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new DiagrammPage());
+        }
     }
 }

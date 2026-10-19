@@ -128,7 +128,12 @@ namespace _523_Mozgovaya.ClientPages
 
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!CurrentUser.IsLoggedIn)
+            {
+                MessageBox.Show("Для покупки билетов нужно войти в аккаунт!");
+                NavigationService?.Navigate(new LoginPage());
+                return;
+            }
             int quantity = GetSelectedQuantity();
             double price = selectedCategory.price;
             double discount = selectedLgot?.skidka ?? 0;

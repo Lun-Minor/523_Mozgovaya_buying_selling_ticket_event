@@ -158,12 +158,7 @@ namespace _523_Mozgovaya
 
         private void btnBuyTickets_Click(object sender, RoutedEventArgs e)
         {
-            if (!CurrentUser.IsLoggedIn)
-            {
-                MessageBox.Show("Для покупки билетов нужно войти в аккаунт!");
-                NavigationService?.Navigate(new LoginPage());
-                return;
-            }
+           
             NavigationService?.Navigate(new ClientTicketPage(currentEvent));
         }
 
