@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:_523_Mozgovaya.AdminPages"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="1100"
+      d:DesignHeight="700" d:DesignWidth="1200"
       Title="EventAdminPage" Background="White">
 
 
@@ -34,8 +34,12 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Column="0" Text="{Binding name}"  FontSize="26" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                    <Button  x:Name="bt_delete" Content="удалить мероприятие" Width="230" Foreground="Red" HorizontalAlignment="Right" Click="bt_delete_Click"/>
-                    <Button Grid.Column="1" x:Name="loved"  Content="добавить в избранное"  Width="250" Height="35" Margin="5" Click="loved_Click"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button  x:Name="bt_delete" Content="удалить мероприятие" Width="230" Height="35" HorizontalAlignment="Right" Click="bt_delete_Click"/>
+                        <Button x:Name="loved"  Content="добавить в избранное"  Width="250" Height="35" Margin="5" Click="loved_Click"/>
+                        <Button x:Name="bt_edit" Content="Редактировать" Height="35" Click="bt_edit_Click"/>
+                    </StackPanel>
+                   
                 </Grid>
 
 
@@ -109,7 +113,7 @@
                                     <TextBlock Text="{Binding comment}"  TextWrapping="Wrap" FontSize="13" Margin="0,0,0,5"/>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding rating, StringFormat='★ {0}/10'}"  Foreground="Orange" FontWeight="Bold" FontSize="12"/>
-                                        <TextBlock Text="{Binding created_at, StringFormat='   {0:dd.MM.yyyy}'}" Foreground="Gray" FontSize="12"/>
+                                        <TextBlock Text="{Binding created_at, StringFormat='   {0:dd.MM.yyyy}'}" FontSize="12"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>

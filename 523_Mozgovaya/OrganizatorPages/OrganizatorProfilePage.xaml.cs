@@ -96,5 +96,10 @@ namespace _523_Mozgovaya.OrganizatorPages
 
             NavigationService?.Navigate(new OrganizatorCreateEventPage());
         }
+
+        private void bt_change_password_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new ChangePasswordOrganizatorPage());
+        }
     }
 }

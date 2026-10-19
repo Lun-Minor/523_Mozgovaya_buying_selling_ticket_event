@@ -26,7 +26,8 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Content="Назад" Width="100" Height="35" Click="btnBack_Click"/>
                 <Button Content="Избранное" HorizontalAlignment="Right" Margin="4" Height="35"  x:Name="bt_loved" Click="bt_loved_Click"/>
-                <Button Content="заявка на организатора" HorizontalAlignment="Right" Margin="4" Height="35"  Width="250" x:Name="bt_zavki" Click="bt_zavki_Click"/>
+                <Button Content="Заявка на организатора" HorizontalAlignment="Right" Margin="4" Height="35"  Width="250" x:Name="bt_zavki" Click="bt_zavki_Click"/>
+                <Button Content="Сменить пароль" Margin="4" Height="35"  Width="200" x:Name="bt_change_password" Click="bt_change_password_Click"/>
             </StackPanel>
 
         </Grid>

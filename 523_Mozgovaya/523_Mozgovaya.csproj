@@ -78,11 +78,20 @@
     <Compile Include="AdminPages\AdminTicketPage.xaml.cs">
       <DependentUpon>AdminTicketPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\ChangePasswordAdminPage.xaml.cs">
+      <DependentUpon>ChangePasswordAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AdminPages\EventAdminPage.xaml.cs">
       <DependentUpon>EventAdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminPages\RecreateEventAdminPage.xaml.cs">
+      <DependentUpon>RecreateEventAdminPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPages\ChangePasswordClientPage.xaml.cs">
+      <DependentUpon>ChangePasswordClientPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClientPages\ClientEventPage.xaml.cs">
       <DependentUpon>ClientEventPage.xaml</DependentUpon>
@@ -106,6 +115,9 @@
     <Compile Include="CurrentUser.cs" />
     <Compile Include="Event.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\ChangePasswordOrganizatorPage.xaml.cs">
+      <DependentUpon>ChangePasswordOrganizatorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="OrganizatorPages\OrganixatorLovedPage.xaml.cs">
       <DependentUpon>OrganixatorLovedPage.xaml</DependentUpon>
@@ -211,7 +223,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AdminPages\ChangePasswordAdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AdminPages\EventAdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminPages\RecreateEventAdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientPages\ChangePasswordClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,6 +260,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ClientPages\RequestPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OrganizatorPages\ChangePasswordOrganizatorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

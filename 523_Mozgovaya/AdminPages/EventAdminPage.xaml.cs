@@ -193,5 +193,10 @@ namespace _523_Mozgovaya.AdminPages
             
            
         }
+
+        private void bt_edit_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new RecreateEventAdminPage(currentEvent));
+        }
     }
 }

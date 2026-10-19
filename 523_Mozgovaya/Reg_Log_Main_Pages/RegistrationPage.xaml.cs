@@ -63,9 +63,9 @@ namespace _523_Mozgovaya
 
                 if (!en)
                 {
-                    MessageBox.Show("Используйте только английскую расскладку!");
+                    MessageBox.Show("Используйте только английскую расскладку!"); return;
                 }
-                else if (!number) { MessageBox.Show("Добавьте хотя бы одну цифру!"); }
+                else if (!number) { MessageBox.Show("Добавьте хотя бы одну цифру!"); return;}
                     
                 if (en && number)
                 {

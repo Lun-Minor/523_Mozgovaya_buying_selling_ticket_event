@@ -92,5 +92,10 @@ namespace _523_Mozgovaya.ClientPages
         {
             NavigationService?.Navigate(new RequestPage());
         }
+
+        private void bt_change_password_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService?.Navigate(new ChangePasswordClientPage());
+        }
     }
 }
