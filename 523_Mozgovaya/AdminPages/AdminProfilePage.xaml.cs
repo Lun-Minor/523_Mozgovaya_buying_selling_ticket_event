@@ -91,7 +91,7 @@ namespace _523_Mozgovaya.AdminPages
 
         private void bt_zavki_Click(object sender, RoutedEventArgs e)
         {
-            //NavigationService?.Navigate(new AdminPage());
+            NavigationService?.Navigate(new AdminRequestPage());
         }
     }
 }

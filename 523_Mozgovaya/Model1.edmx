@@ -24,6 +24,7 @@
           <Property Name="age_limit" Type="int" Nullable="false" />
           <Property Name="cover_image" Type="nvarchar" MaxLength="255" />
           <Property Name="rating" Type="float" />
+          <Property Name="status" Type="int" />
         </EntityType>
         <EntityType Name="EventGenre">
           <Key>
@@ -86,6 +87,17 @@
           <Property Name="inn" Type="nvarchar" MaxLength="100" />
           <Property Name="contact_email" Type="nvarchar" MaxLength="100" />
           <Property Name="id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="OrganizerRequest">
+          <Key>
+            <PropertyRef Name="id_request" />
+          </Key>
+          <Property Name="id_request" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="org_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="inn" Type="nvarchar" MaxLength="100" />
+          <Property Name="contact_email" Type="nvarchar" MaxLength="100" />
+          <Property Name="request_date" Type="datetime" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -350,6 +362,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Request_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrganizerRequest" Type="Self.OrganizerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="OrganizerRequest">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Review_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
@@ -384,6 +410,7 @@
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Organizer" EntityType="Self.Organizer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganizerRequest" EntityType="Self.OrganizerRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
@@ -451,6 +478,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Organizer" EntitySet="Organizer" />
           </AssociationSet>
+          <AssociationSet Name="FK_Request_User" Association="Self.FK_Request_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrganizerRequest" EntitySet="OrganizerRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_Review_User" Association="Self.FK_Review_User">
             <End Role="User" EntitySet="User" />
             <End Role="Review" EntitySet="Review" />
@@ -490,6 +521,7 @@
           <NavigationProperty Name="Genre" Relationship="Self.EventGenre" FromRole="Event" ToRole="Genre" />
           <NavigationProperty Name="User" Relationship="Self.Favorite" FromRole="Event" ToRole="User" />
           <Property Name="rating" Type="Double" />
+          <Property Name="status" Type="Int32" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -630,6 +662,7 @@
           <NavigationProperty Name="Review" Relationship="Self.FK_Review_User" FromRole="User" ToRole="Review" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Event" Relationship="Self.Favorite" FromRole="User" ToRole="Event" />
+          <NavigationProperty Name="OrganizerRequest" Relationship="Model.FK_Request_User" FromRole="User" ToRole="OrganizerRequest" />
         </EntityType>
         <Association Name="FK__Event__id_catego__5629CD9C">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -870,7 +903,38 @@
             <End Role="Event" EntitySet="Event" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
+          <EntitySet Name="OrganizerRequest" EntityType="Model.OrganizerRequest" />
+          <AssociationSet Name="FK_Request_User" Association="Model.FK_Request_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrganizerRequest" EntitySet="OrganizerRequest" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="OrganizerRequest">
+          <Key>
+            <PropertyRef Name="id_request" />
+          </Key>
+          <Property Name="id_request" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="org_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="inn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="contact_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="request_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Model.FK_Request_User" FromRole="OrganizerRequest" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Request_User">
+          <End Type="Model.User" Role="User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.OrganizerRequest" Role="OrganizerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="OrganizerRequest">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -888,6 +952,7 @@
           <EntitySetMapping Name="Event">
             <EntityTypeMapping TypeName="Model.Event">
               <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="rating" ColumnName="rating" />
                 <ScalarProperty Name="id_event" ColumnName="id_event" />
                 <ScalarProperty Name="id_organizer" ColumnName="id_organizer" />
@@ -1044,6 +1109,18 @@
               <ScalarProperty Name="id_user" ColumnName="id_user" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="OrganizerRequest">
+            <EntityTypeMapping TypeName="Model.OrganizerRequest">
+              <MappingFragment StoreEntitySet="OrganizerRequest">
+                <ScalarProperty Name="request_date" ColumnName="request_date" />
+                <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+                <ScalarProperty Name="inn" ColumnName="inn" />
+                <ScalarProperty Name="org_name" ColumnName="org_name" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_request" ColumnName="id_request" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

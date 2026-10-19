@@ -26,10 +26,6 @@ namespace _523_Mozgovaya.ClientPages
         public ClientPage()
         {
             InitializeComponent();
-            var events = Core.entities.Event.ToList();
-
-
-            list_events.ItemsSource = events;
             genreFilters = Core.entities.Genre.Select(g => new GenreFilter
             {
                 id_genre = g.id_genre,
@@ -38,11 +34,43 @@ namespace _523_Mozgovaya.ClientPages
             }).ToList();
 
             cbGenres.ItemsSource = genreFilters;
-
-
             UpdateEvents();
+        }
+
+
+
+        private void UpdateEvents()
+        {
+            if (!IsInitialized) return;
+
+            var events = Core.entities.Event.Include(e => e.Genre).Where(e => e.status == 1).ToList();
+
+            // Поиск
+            if (!string.IsNullOrWhiteSpace(tb_search.Text))
+            {
+                events = events.Where(x => x.name != null && x.name.ToLower().Contains(tb_search.Text.ToLower())).ToList();
+            }
+
+            // Сортировка 
+            switch (combo_box.SelectedIndex)
+            {
+                case 0: break;
+                case 1: events = events.OrderBy(x => x.name).ToList(); break;
+                case 2: events = events.OrderByDescending(x => x.rating).ToList(); break;
+            }
+
+            // Фильтр по жанрам
+            var selectedIds = genreFilters.Where(g => g.IsSelected).Select(g => g.id_genre).ToList();
+            if (selectedIds.Count > 0)
+            {
+                events = events.Where(e => e.Genre.Any(g => selectedIds.Contains(g.id_genre))).ToList();
+            }
+
+            list_events.ItemsSource = events;
+
 
         }
+
 
         private void btn_profile_Click(object sender, RoutedEventArgs e)
         {
@@ -50,51 +78,7 @@ namespace _523_Mozgovaya.ClientPages
         }
 
 
-        private void UpdateEvents()
-        {
-            if (!IsInitialized)
-            {
-                return;
-            }
-            try
-            {
-
-                var events = Core.entities.Event.Include(e => e.Genre).ToList();
-
-                //Поиск
-                if (!string.IsNullOrWhiteSpace(tb_search.Text))
-                {
-                    events = events.Where(x => x.name != null && x.name.ToLower().Contains(tb_search.Text.ToLower())
-                    ).ToList();
-                }
-
-                //Сортировка 
-                switch (combo_box.SelectedIndex)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        events = events.OrderBy(x => x.name).ToList();
-                        break;
-                    case 2:
-                        events = events.OrderByDescending(x => x.rating).ToList();
-                        break;
-                }
-
-
-                var selectedIds = genreFilters.Where(g => g.IsSelected).Select(g => g.id_genre).ToList();
-
-                if (selectedIds.Count > 0)
-                {
-                    events = events.Where(e => e.Genre.Any(g => selectedIds.Contains(g.id_genre))).ToList();
-                }
-
-
-                list_events.ItemsSource = events;
-            }
-            catch { }
-
-        }
+       
 
 
 

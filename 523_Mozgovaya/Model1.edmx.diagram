@@ -34,6 +34,8 @@
         <AssociationConnector Association="Model.FK__Ticket__id_ticke__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="Model.EventGenre" ManuallyRouted="false" />
         <AssociationConnector Association="Model.Favorite" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.OrganizerRequest" Width="1.5" PointX="5.25" PointY="14.25" />
+        <AssociationConnector Association="Model.FK_Request_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

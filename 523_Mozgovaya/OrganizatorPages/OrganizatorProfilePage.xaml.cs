@@ -94,7 +94,7 @@ namespace _523_Mozgovaya.OrganizatorPages
         private void bt_create_Click(object sender, RoutedEventArgs e)
         {
 
-            MessageBox.Show("sda", "sdas");
+            NavigationService?.Navigate(new OrganizatorCreateEventPage());
         }
     }
 }

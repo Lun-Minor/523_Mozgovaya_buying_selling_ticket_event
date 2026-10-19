@@ -90,7 +90,7 @@ namespace _523_Mozgovaya.ClientPages
 
         private void bt_zavki_Click(object sender, RoutedEventArgs e)
         {
-            //
+            NavigationService?.Navigate(new RequestPage());
         }
     }
 }

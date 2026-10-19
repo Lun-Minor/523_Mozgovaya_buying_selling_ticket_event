@@ -39,5 +39,6 @@ namespace _523_Mozgovaya
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<TicketCategory> TicketCategory { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<OrganizerRequest> OrganizerRequest { get; set; }
     }
 }
