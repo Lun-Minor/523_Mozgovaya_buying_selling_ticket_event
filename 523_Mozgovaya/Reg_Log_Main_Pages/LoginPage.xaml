@@ -13,8 +13,11 @@
         <StackPanel Margin="10">
             <Label Content="Авторизация" HorizontalAlignment="Center" FontSize="40" FontWeight="Bold" Margin="40"/>
             <StackPanel >
-                <TextBlock Text="Введите логин" HorizontalAlignment="Center"/>
-                <TextBox x:Name="log_tb" Height="30" Width="200" HorizontalAlignment="Center" ToolTip="поле для ввода логина"/>
+                 <Grid Width="200" HorizontalAlignment="Center" Margin="5">
+                    <TextBox x:Name="log_tb" Height="30" ToolTip="поле для ввода логина" TextChanged="log_tb_TextChanged"/>
+                    <TextBlock x:Name="tbHintLogin" Text="Введите логин" Foreground="Gray" VerticalAlignment="Center" IsHitTestVisible="False"/>
+                     
+                </Grid>
                 <TextBlock Text="Введите пароль" HorizontalAlignment="Center"/>
                 <PasswordBox x:Name="password_box" Height="30" Width="200" HorizontalAlignment="Center" Background="{DynamicResource PageBackground}" ToolTip="поле для ввода пароля" />
             </StackPanel>

@@ -178,22 +178,17 @@ namespace _523_Mozgovaya
             }
         }
 
-        private void txtHintLogin_MouseLeftButtonUp(object sender,
-MouseButtonEventArgs e)
+     
+        private void log_tb_TextChanged(object sender, TextChangedEventArgs e)
         {
-            log_tb.Focus();
+            tbHintLogin.Visibility = string.IsNullOrEmpty(log_tb.Text) ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        private void txtHintPass_MouseLeftButtonUp(object sender,
-        MouseButtonEventArgs e)
-        {
-            password_box.Focus();
-        }
     }
 
 
 
-        
+
 }
 
 
