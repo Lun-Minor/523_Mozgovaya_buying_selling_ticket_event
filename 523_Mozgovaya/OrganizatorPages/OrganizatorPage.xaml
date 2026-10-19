@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.OrganizatorPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="OrganizatorPage" Background="White">
+      Title="Каталог" Background="White">
 
     <Grid>
         <Grid.RowDefinitions>

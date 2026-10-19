@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1100"
-      Title="EventPage" Background="White">
+      Title="О мероприятии" Background="White">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>

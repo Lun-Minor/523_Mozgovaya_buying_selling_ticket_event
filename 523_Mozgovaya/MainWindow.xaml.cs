@@ -23,8 +23,17 @@ namespace _523_Mozgovaya
         public MainWindow()
         {
             InitializeComponent();
-
+            mainframe.Navigated += Mainframe_Navigated;
             mainframe.Navigate(new MainPage());
+        }
+
+        
+        private void Mainframe_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (e.Content is Page page)
+            {
+                this.Title = page.Title;
+            }
         }
     }
 }

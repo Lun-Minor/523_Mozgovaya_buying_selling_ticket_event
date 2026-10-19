@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.AdminPages"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
-      Title="EventAdminPage" Background="White">
+      Title="О мероприятии" Background="White">
 
 
     <Grid Margin="15">

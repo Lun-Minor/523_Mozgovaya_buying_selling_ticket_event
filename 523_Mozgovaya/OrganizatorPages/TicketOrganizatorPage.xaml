@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:_523_Mozgovaya.OrganizatorPages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TicketOrganizatorPage">
+      Title="Билеты">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
