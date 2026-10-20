@@ -18,7 +18,6 @@ namespace _523_Mozgovaya
         public int id_ticket_category { get; set; }
         public Nullable<int> id_lgot { get; set; }
         public Nullable<int> id_order { get; set; }
-        public string seat_number { get; set; }
         public int status { get; set; }
     
         public virtual Lgot Lgot { get; set; }

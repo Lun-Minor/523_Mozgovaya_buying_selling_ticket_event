@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="id_category" />
@@ -145,7 +145,6 @@
           <Property Name="id_ticket_category" Type="int" Nullable="false" />
           <Property Name="id_lgot" Type="int" />
           <Property Name="id_order" Type="int" />
-          <Property Name="seat_number" Type="nvarchar" MaxLength="255" />
           <Property Name="status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TicketCategory">
@@ -237,7 +236,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Session__id_loca__5535A963">
-          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Session" Type="Self.Session" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Location">
@@ -501,7 +502,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -524,14 +526,14 @@
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="age_limit" Type="Int32" Nullable="false" />
           <Property Name="cover_image" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="rating" Type="Double" />
+          <Property Name="status" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Event__id_catego__5629CD9C" FromRole="Event" ToRole="Category" />
           <NavigationProperty Name="Review" Relationship="Self.FK__Review__id_event__5BE2A6F2" FromRole="Event" ToRole="Review" />
           <NavigationProperty Name="Session" Relationship="Self.FK__Session__id_even__5441852A" FromRole="Event" ToRole="Session" />
           <NavigationProperty Name="Organizer" Relationship="Self.FK_Event_Organizer" FromRole="Event" ToRole="Organizer" />
           <NavigationProperty Name="Genre" Relationship="Self.EventGenre" FromRole="Event" ToRole="Genre" />
           <NavigationProperty Name="User" Relationship="Self.Favorite" FromRole="Event" ToRole="User" />
-          <Property Name="rating" Type="Double" />
-          <Property Name="status" Type="Int32" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -586,6 +588,18 @@
           <NavigationProperty Name="Event" Relationship="Self.FK_Event_Organizer" FromRole="Organizer" ToRole="Event" />
           <NavigationProperty Name="User" Relationship="Self.FK_Organizer_User" FromRole="Organizer" ToRole="User" />
         </EntityType>
+        <EntityType Name="OrganizerRequest">
+          <Key>
+            <PropertyRef Name="id_request" />
+          </Key>
+          <Property Name="id_request" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="org_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="contact_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="request_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Request_User" FromRole="OrganizerRequest" ToRole="User" />
+        </EntityType>
         <EntityType Name="Review">
           <Key>
             <PropertyRef Name="id_review" />
@@ -638,7 +652,6 @@
           <Property Name="id_ticket_category" Type="Int32" Nullable="false" />
           <Property Name="id_lgot" Type="Int32" />
           <Property Name="id_order" Type="Int32" />
-          <Property Name="seat_number" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Lgot" Relationship="Self.FK__Ticket__id_lgot__59063A47" FromRole="Ticket" ToRole="Lgot" />
           <NavigationProperty Name="Order" Relationship="Self.FK__Ticket__id_order__59FA5E80" FromRole="Ticket" ToRole="Order" />
@@ -669,10 +682,10 @@
           <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
           <NavigationProperty Name="Organizer" Relationship="Self.FK_Organizer_User" FromRole="User" ToRole="Organizer" />
+          <NavigationProperty Name="OrganizerRequest" Relationship="Self.FK_Request_User" FromRole="User" ToRole="OrganizerRequest" />
           <NavigationProperty Name="Review" Relationship="Self.FK_Review_User" FromRole="User" ToRole="Review" />
           <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Event" Relationship="Self.Favorite" FromRole="User" ToRole="Event" />
-          <NavigationProperty Name="OrganizerRequest" Relationship="Model.FK_Request_User" FromRole="User" ToRole="OrganizerRequest" />
         </EntityType>
         <Association Name="FK__Event__id_catego__5629CD9C">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -687,7 +700,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Review__id_event__5BE2A6F2">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Event">
@@ -699,7 +714,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Session__id_even__5441852A">
-          <End Role="Event" Type="Self.Event" Multiplicity="1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Session" Type="Self.Session" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Event">
@@ -735,7 +752,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Session__id_loca__5535A963">
-          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Location" Type="Self.Location" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Session" Type="Self.Session" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Location">
@@ -747,7 +766,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Ticket__id_order__59FA5E80">
-          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Order">
@@ -759,7 +780,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -771,7 +794,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Organizer_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Organizer" Type="Self.Organizer" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -782,8 +807,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Request_User">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OrganizerRequest" Type="Self.OrganizerRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="OrganizerRequest">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Review_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Review" Type="Self.Review" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -807,7 +848,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__TicketCat__id_se__571DF1D5">
-          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="TicketCategory" Type="Self.TicketCategory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Session">
@@ -819,7 +862,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Ticket__id_ticke__5812160E">
-          <End Role="TicketCategory" Type="Self.TicketCategory" Multiplicity="1" />
+          <End Role="TicketCategory" Type="Self.TicketCategory" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TicketCategory">
@@ -846,6 +891,7 @@
           <EntitySet Name="Location" EntityType="Self.Location" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="Organizer" EntityType="Self.Organizer" />
+          <EntitySet Name="OrganizerRequest" EntityType="Self.OrganizerRequest" />
           <EntitySet Name="Review" EntityType="Self.Review" />
           <EntitySet Name="Role" EntityType="Self.Role" />
           <EntitySet Name="Session" EntityType="Self.Session" />
@@ -889,6 +935,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Organizer" EntitySet="Organizer" />
           </AssociationSet>
+          <AssociationSet Name="FK_Request_User" Association="Self.FK_Request_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrganizerRequest" EntitySet="OrganizerRequest" />
+          </AssociationSet>
           <AssociationSet Name="FK_Review_User" Association="Self.FK_Review_User">
             <End Role="User" EntitySet="User" />
             <End Role="Review" EntitySet="Review" />
@@ -913,38 +963,7 @@
             <End Role="Event" EntitySet="Event" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <EntitySet Name="OrganizerRequest" EntityType="Model.OrganizerRequest" />
-          <AssociationSet Name="FK_Request_User" Association="Model.FK_Request_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="OrganizerRequest" EntitySet="OrganizerRequest" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="OrganizerRequest">
-          <Key>
-            <PropertyRef Name="id_request" />
-          </Key>
-          <Property Name="id_request" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_user" Type="Int32" Nullable="false" />
-          <Property Name="org_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="inn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="contact_email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="request_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="User" Relationship="Model.FK_Request_User" FromRole="OrganizerRequest" ToRole="User" />
-        </EntityType>
-        <Association Name="FK_Request_User">
-          <End Type="Model.User" Role="User" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="Model.OrganizerRequest" Role="OrganizerRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id_user" />
-            </Principal>
-            <Dependent Role="OrganizerRequest">
-              <PropertyRef Name="id_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -962,8 +981,6 @@
           <EntitySetMapping Name="Event">
             <EntityTypeMapping TypeName="Model.Event">
               <MappingFragment StoreEntitySet="Event">
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="rating" ColumnName="rating" />
                 <ScalarProperty Name="id_event" ColumnName="id_event" />
                 <ScalarProperty Name="id_organizer" ColumnName="id_organizer" />
                 <ScalarProperty Name="id_category" ColumnName="id_category" />
@@ -971,6 +988,8 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="age_limit" ColumnName="age_limit" />
                 <ScalarProperty Name="cover_image" ColumnName="cover_image" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1025,6 +1044,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrganizerRequest">
+            <EntityTypeMapping TypeName="Model.OrganizerRequest">
+              <MappingFragment StoreEntitySet="OrganizerRequest">
+                <ScalarProperty Name="id_request" ColumnName="id_request" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="org_name" ColumnName="org_name" />
+                <ScalarProperty Name="inn" ColumnName="inn" />
+                <ScalarProperty Name="contact_email" ColumnName="contact_email" />
+                <ScalarProperty Name="request_date" ColumnName="request_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Review">
             <EntityTypeMapping TypeName="Model.Review">
               <MappingFragment StoreEntitySet="Review">
@@ -1074,7 +1105,6 @@
                 <ScalarProperty Name="id_ticket_category" ColumnName="id_ticket_category" />
                 <ScalarProperty Name="id_lgot" ColumnName="id_lgot" />
                 <ScalarProperty Name="id_order" ColumnName="id_order" />
-                <ScalarProperty Name="seat_number" ColumnName="seat_number" />
                 <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1119,18 +1149,6 @@
               <ScalarProperty Name="id_user" ColumnName="id_user" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="OrganizerRequest">
-            <EntityTypeMapping TypeName="Model.OrganizerRequest">
-              <MappingFragment StoreEntitySet="OrganizerRequest">
-                <ScalarProperty Name="request_date" ColumnName="request_date" />
-                <ScalarProperty Name="contact_email" ColumnName="contact_email" />
-                <ScalarProperty Name="inn" ColumnName="inn" />
-                <ScalarProperty Name="org_name" ColumnName="org_name" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="id_request" ColumnName="id_request" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -122,30 +122,6 @@
     <Compile Include="Event.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="OrganizatorPages\ChangePasswordOrganizatorPage.xaml.cs">
-      <DependentUpon>ChangePasswordOrganizatorPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrganizatorPages\OrganixatorLovedPage.xaml.cs">
-      <DependentUpon>OrganixatorLovedPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrganizatorPages\OrganizatorCreateEventPage.xaml.cs">
-      <DependentUpon>OrganizatorCreateEventPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrganizatorPages\OrganizatorEventPage.xaml.cs">
-      <DependentUpon>OrganizatorEventPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrganizatorPages\OrganizatorProfilePage.xaml.cs">
-      <DependentUpon>OrganizatorProfilePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrganizatorPages\TicketOrganizatorPage.xaml.cs">
-      <DependentUpon>TicketOrganizatorPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="OrganizerRequest.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Reg_Log_Main_Pages\EventPage.xaml.cs">
-      <DependentUpon>EventPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Genre.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -173,11 +149,35 @@
     <Compile Include="Order.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="OrganizatorPages\OrganizatorPage.xaml.cs">
-      <DependentUpon>OrganizatorPage.xaml</DependentUpon>
+    <Compile Include="OrganizatorPages\ChangePasswordOrganizatorPage.xaml.cs">
+      <DependentUpon>ChangePasswordOrganizatorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\OrganixatorLovedPage.xaml.cs">
+      <DependentUpon>OrganixatorLovedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\OrganizatorCreateEventPage.xaml.cs">
+      <DependentUpon>OrganizatorCreateEventPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\OrganizatorEventPage.xaml.cs">
+      <DependentUpon>OrganizatorEventPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\OrganizatorProfilePage.xaml.cs">
+      <DependentUpon>OrganizatorProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\TicketOrganizatorPage.xaml.cs">
+      <DependentUpon>TicketOrganizatorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Organizer.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizerRequest.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Reg_Log_Main_Pages\EventPage.xaml.cs">
+      <DependentUpon>EventPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizatorPages\OrganizatorPage.xaml.cs">
+      <DependentUpon>OrganizatorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Reg_Log_Main_Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -376,16 +376,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Resource Include="res\art.jpg" />
     <Resource Include="res\symphony.jpg" />
     <Resource Include="res\theater.jpg" />
@@ -431,6 +421,18 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

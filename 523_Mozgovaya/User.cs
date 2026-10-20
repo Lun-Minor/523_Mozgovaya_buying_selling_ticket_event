@@ -19,9 +19,9 @@ namespace _523_Mozgovaya
         {
             this.Order = new HashSet<Order>();
             this.Organizer = new HashSet<Organizer>();
+            this.OrganizerRequest = new HashSet<OrganizerRequest>();
             this.Review = new HashSet<Review>();
             this.Event = new HashSet<Event>();
-            this.OrganizerRequest = new HashSet<OrganizerRequest>();
         }
     
         public int id_user { get; set; }
@@ -37,11 +37,11 @@ namespace _523_Mozgovaya
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Organizer> Organizer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrganizerRequest> OrganizerRequest { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Review { get; set; }
         public virtual Role Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Event { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrganizerRequest> OrganizerRequest { get; set; }
     }
 }

@@ -154,7 +154,7 @@ namespace _523_Mozgovaya.AdminPages
                     id_ticket_category = selectedCategory.id_ticket_category,
                     id_lgot = selectedLgot?.id_lgot,
                     id_order = order.id_order,
-                    seat_number = $"M{order.id_order}-{i}",
+                    
                     status = 1
                 };
                 Core.entities.Ticket.Add(ticket);

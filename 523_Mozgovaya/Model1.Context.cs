@@ -32,6 +32,7 @@ namespace _523_Mozgovaya
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Organizer> Organizer { get; set; }
+        public virtual DbSet<OrganizerRequest> OrganizerRequest { get; set; }
         public virtual DbSet<Review> Review { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Session> Session { get; set; }
@@ -39,6 +40,5 @@ namespace _523_Mozgovaya
         public virtual DbSet<Ticket> Ticket { get; set; }
         public virtual DbSet<TicketCategory> TicketCategory { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<OrganizerRequest> OrganizerRequest { get; set; }
     }
 }
