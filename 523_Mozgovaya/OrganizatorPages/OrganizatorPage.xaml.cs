@@ -114,7 +114,7 @@ namespace _523_Mozgovaya.OrganizatorPages
             var selected_event = list_events.SelectedItem as Event;
             if (selected_event != null)
             {
-               // NavigationService?.Navigate(new EventPage());
+                NavigationService?.Navigate(new OrganizatorEventPage(selected_event));
             }
         }
     }
